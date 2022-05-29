@@ -1,0 +1,28 @@
+.plyr {
+  --plyr-color-main: #f1b722;
+  --plyr-range-thumb-background: #f1b722;
+  --plyr-menu-background: #181818;
+  --plyr-menu-color: white;
+  --plyr-menu-border-color: #262626;
+
+  width: 100%;
+  height: 100%;
+}
+
+.plyr__progress input {
+  cursor: pointer;
+}
+
+.plyr__video-overlay {
+  position: absolute;
+  top: 30;
+  left: 30;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.episode-buttons {
+  width: 100% !important;
+}

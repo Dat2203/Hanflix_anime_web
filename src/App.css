@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&family=Nunito+Sans&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+body {
+  font-family: "Fira Sans", Arial, sans-serif;
+  @apply w-full min-h-screen overflow-x-hidden  bg-background;
+}
+
+.no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tooltip-panel {
+  @apply opacity-0 transition-all duration-300 invisible;
+}
+
+.tooltip:hover .tooltip-panel,
+.tooltip-panel:hover {
+  @apply opacity-100 z-10 visible;
+}
+
+.tooltip::after {
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 150%;
+  top: 100%;
+}
+
+.slick-track {
+  height: min-content !important;
+}
+
+.slide-anime-image {
+  height: 20rem;
+}
+
+.slick-dots li button:before {
+  @apply text-gray-400;
+}
+
+.slick-dots li.slick-active button:before {
+  @apply text-white;
+}
+
+::-webkit-scrollbar {
+  @apply w-1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-background-darker;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-md;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-opacity-80;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+.slick-slide {
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+.slick-list {
+  margin: 0 -0.5rem;
+}
+@tailwind utilities;
+.cut-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
