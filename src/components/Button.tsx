@@ -11,57 +11,63 @@ interface ButtonRawProps extends React.HTMLAttributes<HTMLButtonElement> {
   iconClassName?: string;
 }
 
-interface ButtonProps extends ButtonRawProps {
+export interface ButtonProps extends ButtonRawProps {
   onClick?: () => void;
   to?: To;
 }
 
-const ButtonRaw = (props: ButtonRawProps) => {
-  const {
-    className,
-    iconSize = 20,
-    iconClassName,
-    startIcon: StartIcon,
-    endIcon: EndIcon,
+const ButtonRaw = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const {
+      className,
+      iconSize = 20,
+      iconClassName,
+      startIcon: StartIcon,
+      endIcon: EndIcon,
 
-    ...buttonProps
-  } = props;
-  return (
-    <button
-      className={classNames(
-        "flex items-center px-4 py-2 rounded-md font-medium text-xs md:text-sm lg:text-base hover:bg-opacity-80",
-        className
-      )}
-      {...buttonProps}
-    >
-      {StartIcon && (
-        <StartIcon
-          size={iconSize}
-          className={classNames("mr-2", iconClassName)}
-        />
-      )}
-      {props.children}
+      ...buttonProps
+    } = props;
 
-      {EndIcon && (
-        <EndIcon
-          size={iconSize}
-          className={classNames("ml-2", iconClassName)}
-        />
-      )}
-    </button>
-  );
-};
+    return (
+      <button
+        className={classNames(
+          "flex items-center px-4 py-2 rounded-md font-medium text-xs md:text-sm lg:text-base hover:bg-opacity-80",
+          className
+        )}
+        ref={ref}
+        {...buttonProps}
+      >
+        {StartIcon && (
+          <StartIcon
+            size={iconSize}
+            className={classNames("mr-2", iconClassName)}
+          />
+        )}
+        {props.children}
 
-const Button = (props: ButtonProps) => {
-  const { onClick, to, ...buttonProps } = props;
+        {EndIcon && (
+          <EndIcon
+            size={iconSize}
+            className={classNames("ml-2", iconClassName)}
+          />
+        )}
+      </button>
+    );
+  }
+);
 
-  return to ? (
-    <Link to={to}>
-      <ButtonRaw {...buttonProps} />
-    </Link>
-  ) : (
-    <ButtonRaw {...buttonProps} onClick={onClick} />
-  );
-};
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const { onClick, to, ...buttonProps } = props;
+
+    return to ? (
+      <Link to={to}>
+        <ButtonRaw ref={ref} {...buttonProps} />
+      </Link>
+    ) : (
+      <ButtonRaw ref={ref} {...buttonProps} onClick={onClick} />
+    );
+  }
+);
 
 export default Button;

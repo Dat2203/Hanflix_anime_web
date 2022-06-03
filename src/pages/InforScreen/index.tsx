@@ -32,9 +32,9 @@ const InfoScreen = () => {
   };
 
   return (
-    <div className="py-16">
+    <div className="">
       <div className="w-full">
-        <div className="w-full h-56 overflow-hidden">
+        <div className="w-full h-[350px] overflow-hidden">
           {isLoading ? (
             <Skeleton className="w-full h-full">
               <div className="w-full h-full bg-gray-600"></div>
@@ -42,7 +42,7 @@ const InfoScreen = () => {
           ) : (
             <Image
               src={info?.thumbnail!}
-              className="w-full object-cover filter blur-lg opacity-30"
+              className="w-full object-cover filter blur-sm opacity-90"
             />
           )}
         </div>
@@ -85,7 +85,7 @@ const InfoScreen = () => {
           <div className="w-full px-2 flex flex-col flex-1">
             <div className="flex-col md:flex-row space-x-2 space-y-2 md:space-y-0 -mt-2 self-center md:self-start flex items-center font-bold text-lg text-white filter blur-none">
               <Button
-                className="bg-background-darker hover:bg-opacity-80"
+                className="bg-red-500 hover:bg-opacity-80"
                 onClick={handleClick()}
                 startIcon={BsPlayFill}
                 iconSize={20}
@@ -94,7 +94,7 @@ const InfoScreen = () => {
               </Button>
               {!isLoading && storedInfo && (
                 <Button
-                  className="bg-background-darker hover:bg-opacity-80"
+                  className="bg-white text-black hover:bg-opacity-80"
                   onClick={handleClick(storedInfo.episodeIndex)}
                   startIcon={BsPlayFill}
                   iconSize={20}

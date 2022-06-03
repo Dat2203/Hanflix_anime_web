@@ -12,6 +12,7 @@ const ALL = [...RANKINGS, ...GENRES];
 
 const BrowseScreen = () => {
   const { pathname } = useLocation();
+  console.log(pathname);
 
   const [category, ...slug] = pathname.replace("/", "").split("/");
   console.log(category, slug);

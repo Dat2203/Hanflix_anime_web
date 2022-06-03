@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="pb-16 px-[150px] md:pb-0 min-h-screen">
+      <div className="pb-16 md:pb-0 min-h-screen">
         <Routes>
           {routes.map((element) => (
             <Route

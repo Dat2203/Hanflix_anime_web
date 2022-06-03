@@ -29,8 +29,10 @@ const Header = () => {
   return (
     <div
       className={classNames(
-        "fixed z-30  flex justify-center  items-center px-[200px] w-screen h-16 ",
-        isShrink ? "bg-background-lighter" : "bg-inherit"
+        "fixed z-30  flex justify-center  items-center px-[50px] w-screen h-16 ",
+        isShrink
+          ? "bg-background-lighter"
+          : "bg-gradient-to-b from-black/80 via-black/60 to-transparent"
       )}
     >
       <div className="absolute left-0 p-in">
@@ -38,9 +40,9 @@ const Header = () => {
           <Image src="/logo.png" alt="logo" />
         </a>
       </div>
-      <div className="md:hidden absolute right-0 p-in flex justify-center items-center"></div>
+      <div className="lg:hidden absolute right-0 p-in flex justify-center items-center"></div>
       <DesktopMenu matchedRoute={matchedRoute} />
-      <div className="hidden md:block absolute right-0 p-in">
+      <div className="hidden sm:block absolute right-0 p-in">
         <Search />
       </div>
     </div>

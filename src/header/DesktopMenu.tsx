@@ -11,10 +11,8 @@ const DesktopMenu = ({
 }: {
   matchedRoute: RouteMatch | undefined;
 }) => {
-  console.log(headerRoutes);
-
   return (
-    <div className="flex-1 items-center justify-center px-4 hidden md:flex">
+    <div className="flex-1 items-center justify-center px-4 hidden lg:flex">
       {headerRoutes.map((route) =>
         !route.dropdown ? (
           <NavButton

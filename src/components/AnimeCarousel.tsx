@@ -1,16 +1,23 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useRef, useState } from "react";
 import { useEffect } from "react";
-import { Settings } from "react-slick";
 import AnimeCardSkeleton from "./AnimeCardSkeleton";
 import { Anime } from "../interface";
 import AnimeCard from "./AnimeCard";
 import Carousel from "./Carousel";
 import Skeleton from "./Skeleton";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Button from "./Button";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { Navigation } from "swiper";
 
 interface AnimeCarouselProps {
-  settings?: Settings;
   isLoading?: boolean;
   data: Anime[] | undefined;
+  className?: string;
 }
 
 const defaultSettings = {
@@ -44,8 +51,11 @@ const defaultSettings = {
 };
 
 const AnimeCarousel = (props: PropsWithChildren<AnimeCarouselProps>) => {
-  const { data = [], settings, isLoading } = props;
-  const finalSettings = { ...defaultSettings, ...settings };
+  const { data = [], isLoading } = props;
+  const finalSettings = { ...defaultSettings };
+
+  const prevButtonRef = useRef<HTMLButtonElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
   const [slidesToShow, setSlidesToShow] = useState(
     finalSettings.slidesToScroll
   );
@@ -64,7 +74,7 @@ const AnimeCarousel = (props: PropsWithChildren<AnimeCarouselProps>) => {
         const currentResponsive = responsive[responsive.length - i];
 
         if (innerWidth <= currentResponsive.breakpoint) {
-          const settings = currentResponsive.settings as Settings;
+          const settings = currentResponsive.settings;
 
           setSlidesToShow(settings.slidesToShow!);
 
@@ -90,14 +100,53 @@ const AnimeCarousel = (props: PropsWithChildren<AnimeCarouselProps>) => {
 
   return !data.length ? (
     <div className="w-full h-full flex items-center justify-center">
-      <p className="text-gray-300 text-base ">Không có</p>
+      <p className="text-gray-300 text-base ">
+        Không có dữ liệu về anime cần tìm !!
+      </p>
     </div>
   ) : (
-    <Carousel settings={finalSettings}>
+    <Swiper
+      modules={[Navigation]}
+      navigation={{
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      }}
+      breakpoints={{
+        600: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+          spaceBetween: 5,
+        },
+        760: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+          spaceBetween: 5,
+        },
+        1024: {
+          slidesPerView: 5,
+          slidesPerGroup: 5,
+          spaceBetween: 5,
+        },
+      }}
+    >
       {data.map((anime) => (
-        <AnimeCard {...anime} key={anime.slug} />
+        <SwiperSlide>
+          <AnimeCard {...anime} key={anime.slug} />
+        </SwiperSlide>
       ))}
-    </Carousel>
+      <div className="swiper-navigation absolute right-0  bottom-full mb-4 flex space-x-4">
+        <Button
+          ref={prevButtonRef}
+          startIcon={FiChevronLeft}
+          className="swiper-button-prev flex items-center justify-center text-red"
+        />
+        <Button
+          ref={nextButtonRef}
+          startIcon={FiChevronRight}
+          className="swiper-button-next flex items-center justify-center"
+        />
+      </div>
+    </Swiper>
   );
 };
 

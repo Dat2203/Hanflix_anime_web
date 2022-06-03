@@ -45,29 +45,27 @@ const defaultSettings = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
 };
 
 const Carousel = (props: PropsWithChildren<CarouselProps>) => {
-  // const [swiped, setSwiped] = useState(false);
+  const [swiped, setSwiped] = useState(false);
 
-  // const handleSwiped = useCallback(() => {
-  //   setSwiped(true);
-  // }, [setSwiped]);
+  const handleSwiped = useCallback(() => {
+    setSwiped(true);
+  }, [setSwiped]);
 
-  // const handleOnItemClick = useCallback(
-  //   (e: any) => {
-  //     if (swiped) {
-  //       e.stopPropagation();
-  //       e.preventDefault();
-  //       setSwiped(false);
-  //     }
-  //   },
-  //   [swiped]
-  // );
+  const handleOnItemClick = useCallback(
+    (e: any) => {
+      if (swiped) {
+        e.stopPropagation();
+        e.preventDefault();
+        setSwiped(false);
+      }
+    },
+    [swiped]
+  );
 
   const settings = { ...defaultSettings, ...props.settings };
 
